@@ -1,49 +1,41 @@
 #include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 
 int main(int argc, char const *argv[]) {
+    int test_cases;
+    cin >> test_cases;
 
-  int testCases;
-  cin >> testCases;
+    for(int i = 0; i < test_cases; i++){
+        int minutes;
+        cin >> minutes;
 
-  for(int i = 0; i < testCases; i++){
-    int minutes;
-    cin >> minutes;
+        string last_action;
+        cin >> last_action;
 
-    vector<string> actions;
+        bool failed = false;
 
-    for(int ii = 0; ii < minutes; ii++){
-      string coomilk;
-      cin >> coomilk;
+        for(int ii = 1; ii < minutes; ii++){
+            string current_action;
+            cin >> current_action;
 
-      actions.push_back(coomilk);
+            if(last_action.compare("cookie") == 0
+            && current_action.compare("cookie") == 0){
+                failed = true;
+            }
+
+            if(!failed){
+                last_action = current_action;
+            }
+        }
+
+        if(last_action.compare("cookie") == 0){
+            cout << "NO" << endl;
+        }else{
+            cout << "YES" << endl;
+        }
     }
 
-    string lastAction;
-    auto actionsIter = actions.begin();
-    lastAction = *actionsIter;
-    actionsIter++;
-
-    while(actionsIter != actions.end()){
-      if(lastAction.compare("cookie") == 0
-      && (*actionsIter).compare("cookie") == 0){
-        break;
-      }
-
-      lastAction = *actionsIter;
-
-      actionsIter++;
-    }
-
-    if(lastAction.compare("cookie") == 0){
-      cout << "NO" << endl;
-    }else{
-      cout << "YES" << endl;
-    }
-  }
-
-  return 0;
+    return 0;
 }
