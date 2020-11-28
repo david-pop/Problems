@@ -6,11 +6,13 @@ using namespace std;
 
 int main(){
 
-    string line, subline;
+    string line;
     int n, i, j;
     int minInd, maxInd;
     int caseNumber = 0;
 
+    char first;
+    bool same;
 
     while((cin >> line) && (line.length() != 0)){
         caseNumber++;
@@ -19,18 +21,25 @@ int main(){
         cin >> n;
         while(n > 0){
             n--;
+            same = true;
 
             cin >> i >> j;
 
             minInd = min(i, j);
             maxInd = max(i, j);
 
-            subline = line.substr(minInd, maxInd - minInd + 1);
+            first = line[minInd];
+            for (int i = minInd+1; i <= maxInd; ++i){
+                if (line[i] != first){
+                    same = false;
+                    break;
+                }
+            }
 
-            if(subline.find("0") != string::npos && subline.find("1") != string::npos){
-                cout << "No" << endl;
-            } else {
+            if(same){
                 cout << "Yes" << endl;
+            } else {
+                cout << "No" << endl;
             }
         }
     }
